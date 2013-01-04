@@ -39,6 +39,9 @@ $(document).ready( function() {
     			               var userGenderData = res.userGenderData;
     			               var repostRatioData = res.repostRatioData;
     			               var locationData = res.locationData;
+    			               var topRepostData = res.topRepostData;
+    			               var topFollowersData = res.topFollowersData;
+    			               var verifiedUsers = res.verifiedUsers;
     			               
     			               iChart(function(){
     			            	 var chart1 = new iChart.Pie2D({
@@ -47,7 +50,10 @@ $(document).ready( function() {
        			           			data: repostRatioData,
        			           			title : '转发/评论比率',
        			           			shadow:true,
-       			           			shadow_color:'#c7c7c7'
+       			           			shadow_color:'#c7c7c7',
+    			    				sub_option:{ 
+			    						mini_label : true,    			    						
+    			    				}
        			           		});
        			           		chart1.draw();
        			           		
@@ -57,7 +63,10 @@ $(document).ready( function() {
     			           			data: userTypeData,
     			           			title : '用户类别分析',
     			           			shadow:true,
-    			           			shadow_color:'#c7c7c7'
+    			           			shadow_color:'#c7c7c7',
+    			    				sub_option:{
+			    						mini_label : true,    			    						
+    			    				}
     			           		});
     			           		chart2.draw();
     			           		
@@ -67,7 +76,10 @@ $(document).ready( function() {
     			    				data: userGenderData,
     			    				title : '用户性别分析',
     			    				shadow:true,
-    			    				shadow_color:'#c7c7c7'
+    			    				shadow_color:'#c7c7c7',
+    			    				sub_option:{ 
+    			    						mini_label : true,    			    						
+    			    				}
     			    			});
     			    			chart3.draw();
     			    			
@@ -81,6 +93,37 @@ $(document).ready( function() {
     			    			});
     			    			chart4.draw();
     			           		
+    			    			var chart5 = new iChart.Column2D({
+    			    				background_color : '#EFEFEF',
+    			    				render : 'topRepostData',
+    			    				data: topRepostData,
+    			    				title : '二次转发用户排行',
+    			    				shadow:true,
+    			    				shadow_color:'#c7c7c7',
+    			    				width : 800,
+    			    				height : 400,
+    			    			});
+    			    			chart5.draw();
+    			    			var chart6 = new iChart.Column2D({
+    			    				background_color : '#EFEFEF',
+    			    				render : 'topFollowersData',
+    			    				data: topFollowersData,
+    			    				title : '用户粉丝排行',
+    			    				shadow:true,
+    			    				shadow_color:'#c7c7c7',
+    			    				width : 800,
+    			    				height : 400,
+    			    			});
+    			    			chart6.draw();
+    			    			var vuserlist = $("#vuserlist");
+    			    			var cssarray = new Array("", "label-success", "label-warning", "label-important", "label-info", "label-inverse");
+    			    			for(var i=0; i<verifiedUsers.length;i++) {
+    			    				var newspan = $("<span/>").addClass("label").html(verifiedUsers[i]);
+    			    				newspan.addClass(cssarray[i%6]);
+    			    				newspan.css("padding","10px, 10px");
+    			    				newspan.appendTo(vuserlist);
+    			    			}
+    			    			
     			               });
     		               }
     		            },

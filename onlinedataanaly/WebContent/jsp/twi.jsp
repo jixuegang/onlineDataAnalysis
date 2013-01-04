@@ -105,9 +105,9 @@
 			  
             <div class="well row-fluid" id="chart_div" style="display:none">
 		      <fieldset>
-		      <legend><b>微博内容</b></legend>
-		      <p id="twiText"></p>
-		    	<legend><b>转发用户分析</b></legend>
+			    <legend><b>微博内容</b></legend>
+			    <p id="twiText"></p>
+		    	<legend><b>转发综合用户分析</b></legend>
                 <div class="span5">
                 <div id='repostRatio'></div>
 		        </div>
@@ -119,6 +119,17 @@
 		        </div>
 		        <div class="span5">
 		         <div id='repostLocation'></div>
+		        </div>
+		        <legend><b>关键用户分析</b></legend>
+		        <div class="span10">
+		         <div id='topRepostData'></div>
+		        </div>
+		        <div class="span10">
+		         <div id='topFollowersData'></div>
+		        </div>
+		        <div class="span10">
+		         <p style="font-size:20px; font-weight:bold; text-align:center; padding-top:20px;padding-bottom:20px">认证用户列表</p>
+		         <div id='vuserlist'></div>
 		        </div>
               </fieldset>
             </div>

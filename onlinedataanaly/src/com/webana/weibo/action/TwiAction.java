@@ -26,6 +26,12 @@ public class TwiAction extends BaseAction {
     private List<PieChart> repostRatioData;
     
     private List<PieChart> locationData;
+    
+    private List<PieChart> topRepostData;
+    
+    private List<PieChart> topFollowersData;
+    
+    private List<String> verifiedUsers;
 
     private int progress;
     
@@ -64,6 +70,9 @@ public class TwiAction extends BaseAction {
         		userGenderData = ttc.getUserGenderChart();
         		repostRatioData = ttc.getRepostRatioChart();
         		locationData = ttc.getUserLocationChart();
+        		topRepostData = ttc.getTopRepostChart();
+        		topFollowersData = ttc.getTopFollowersChart();
+        		verifiedUsers = ttc.getVerifiedUsers();
 //        		TwiDao dao = TwiDao.getInstance();
 //        		dao.addTwi(twi);
         	}
@@ -97,6 +106,18 @@ public class TwiAction extends BaseAction {
 
 	public List<PieChart> getRepostRatioData() {
 		return repostRatioData;
+	}
+
+	public List<PieChart> getTopRepostData() {
+		return topRepostData;
+	}
+
+	public List<PieChart> getTopFollowersData() {
+		return topFollowersData;
+	}
+
+	public List<String> getVerifiedUsers() {
+		return verifiedUsers;
 	}
 
 }

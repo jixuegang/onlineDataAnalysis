@@ -104,7 +104,7 @@ public class WeiboService {
 				tu.setGender(user.getGender());
 				tu.setLocation(user.getLocation());
 				if(user.isVerified()) {
-					tu.setUserType("V用户");
+					tu.setUserType("认证用户");
 				} else {
 					tu.setUserType("普通用户");
 				}

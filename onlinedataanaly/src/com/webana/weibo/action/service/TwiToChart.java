@@ -24,13 +24,20 @@ public class TwiToChart {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TwiToChart.class);
 
-	public static String[] COLOR = {"#a5c2d5", "#cbab4f", "#76a871"};
+	public static String[] COLOR = {"#a5c2d5", "#cbab4f", "#76a871", "#a56f8f", "#c12c44",
+		"#a56f8f", "#9f7961", "#76a871", "#6f83a5", "#a56f9f"};
 
     private TreeMap<String, Integer> userTypeMap = new TreeMap<String, Integer>();
     
     private TreeMap<String, Integer> genderMap = new TreeMap<String, Integer>();
     
     private TreeMap<String, Integer> locationMap = new TreeMap<String, Integer>();
+    
+    private TreeMap<String, Integer> repostMap = new TreeMap<String, Integer>();
+    
+    private TreeMap<String, Integer> followersMap = new TreeMap<String, Integer>();
+    
+    private TreeMap<String, Integer> verifiedUsersMap = new TreeMap<String, Integer>();    
 
     Tweet twi;
     public TwiToChart(Tweet twi) {
@@ -43,7 +50,65 @@ public class TwiToChart {
     		genderMap.put(user.getGender(), genderMap.containsKey(user.getGender())? (genderMap.get(user.getGender()) + 1) : 1);
     		String location1 = user.getGender()!=null?user.getLocation().split(" ")[0]:user.getLocation();
     		locationMap.put(location1, locationMap.containsKey(location1)? (locationMap.get(location1) + 1) : 1);
+
+    		if(repostMap.keySet().size() >= 10 ) {
+    			addNewUserReplaceMinOne(repostMap, user.getRepostCount(), user.getScreenName());
+    		} else {
+    			repostMap.put(user.getScreenName(), user.getRepostCount());
+    		}
+    		if(followersMap.keySet().size() >= 10 ) {
+    			addNewUserReplaceMinOne(followersMap, user.getFollowers(), user.getScreenName());
+    		} else {
+    			followersMap.put(user.getScreenName(), user.getFollowers());
+    		}
+    		if (user.getUserType().equalsIgnoreCase("认证用户")) {
+    			verifiedUsersMap.put(user.getScreenName(), user.getFollowers());
+    		}
     	}
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<PieChart> getTopRepostChart() {    	
+    	Comparator c = new ValueComparator();
+		List arrayList = new ArrayList(repostMap.entrySet());
+        Collections.sort(arrayList, c);
+        List<PieChart> chartdatas = new ArrayList<PieChart>();
+        for (int i = 0; i < arrayList.size(); i++) {
+        	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
+        	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
+        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	chartdatas.add(chart);
+        }
+        return chartdatas;
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<PieChart> getTopFollowersChart() {    	
+    	Comparator c = new ValueComparator();
+		List arrayList = new ArrayList(followersMap.entrySet());
+        Collections.sort(arrayList, c);
+        List<PieChart> chartdatas = new ArrayList<PieChart>();
+        for (int i = 0; i < arrayList.size(); i++) {
+        	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
+        	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
+        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	chartdatas.add(chart);
+        }
+        return chartdatas;
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private void addNewUserReplaceMinOne(TreeMap<String, Integer> map, int count, String screenName) {
+    	Comparator c = new ValueComparator();
+		List arrayList = new ArrayList(map.entrySet());
+        Collections.sort(arrayList, c);
+        int minIndex = arrayList.size()-1;
+        String name = ((Map.Entry) arrayList.get(minIndex)).getKey().toString();
+        int minValue = (Integer)(((Map.Entry) arrayList.get(minIndex)).getValue());
+        if (minValue < count) {
+        	map.remove(name);
+        	map.put(screenName, count);
+        }
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -98,7 +163,21 @@ public class TwiToChart {
         }
         return chartdatas;
     }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
+    public List<String> getVerifiedUsers() {
+    	Comparator c = new ValueComparator();
+		List arrayList = new ArrayList(verifiedUsersMap.entrySet());
+        Collections.sort(arrayList, c);
+        List<String> verifiedUsers = new ArrayList<String>();
+        for (int i = 0; i < arrayList.size(); i++) {
+        	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
+        	verifiedUsers.add(name);
+        }
+		return verifiedUsers;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
     class ValueComparator implements Comparator {
     	 public int compare(Object o1, Object o2) {
              Map.Entry obj1 = (Map.Entry) o1;
