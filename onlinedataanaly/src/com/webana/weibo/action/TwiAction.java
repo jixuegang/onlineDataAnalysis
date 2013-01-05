@@ -1,6 +1,13 @@
 package com.webana.weibo.action;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.core.io.Resource;
 
 import com.webana.weibo.action.model.PieChart;
 import com.webana.weibo.action.model.Tweet;
@@ -34,8 +41,10 @@ public class TwiAction extends BaseAction {
     private List<String> verifiedUsers;
 
     private int progress;
-    
+
     WeiboService weiboService;
+    
+    Resource  mediaListFile;
 
 	public static final int MAX_NEW_NUM = 200;
 
@@ -53,7 +62,19 @@ public class TwiAction extends BaseAction {
     	if(weiboService == null) {
     		this.addActionError("请先使用微博账号登录才能查询使用查询");
     	} else {
-    		weiboService.queryTweet(twiMid);
+    		List<String> medias = new ArrayList<String>();
+    	    try {
+				BufferedReader	reader = new BufferedReader(new InputStreamReader(mediaListFile.getInputStream()));
+				String line = reader.readLine();
+	            while (line!=null) {
+	            	medias.add(line);
+	                line = reader.readLine();
+	            }
+	    		weiboService.queryTweet(twiMid, medias);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    		
     	}
     	return "ajax";
     }
@@ -118,6 +139,10 @@ public class TwiAction extends BaseAction {
 
 	public List<String> getVerifiedUsers() {
 		return verifiedUsers;
+	}
+
+	public void setMediaListFile(Resource mediaListFile) {
+		this.mediaListFile = mediaListFile;
 	}
 
 }

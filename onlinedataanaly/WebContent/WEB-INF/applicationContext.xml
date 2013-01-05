@@ -8,6 +8,7 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     <bean id="twiAction" class="com.webana.weibo.action.TwiAction"  scope="session">
     	<aop:scoped-proxy/>
+    	<property name="mediaListFile" value="classpath:medialist.txt" />
     </bean>
  	<bean id="userAction" class="com.webana.weibo.action.UserAction" />
 </beans>

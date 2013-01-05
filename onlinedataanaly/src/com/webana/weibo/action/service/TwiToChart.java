@@ -61,7 +61,7 @@ public class TwiToChart {
     		} else {
     			followersMap.put(user.getScreenName(), user.getFollowers());
     		}
-    		if (user.getUserType().equalsIgnoreCase("认证用户")) {
+    		if (user.getUserType().equalsIgnoreCase("认证用户") || user.getUserType().equalsIgnoreCase("媒体用户")) {
     			verifiedUsersMap.put(user.getScreenName(), user.getFollowers());
     		}
     	}

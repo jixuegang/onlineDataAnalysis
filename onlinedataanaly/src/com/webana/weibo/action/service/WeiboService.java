@@ -38,17 +38,19 @@ public class WeiboService {
 
 	private Tweet twi;
 
-
 	private String tweetId;
 	
 	private int finishedPages = 1;
 	
+	private List<String> mediaList;
+	
 	public WeiboService(String token) {
 		tm = new Timeline();
-		tm.setToken(token);
+		tm.setToken(token);		
 	}
 	
-	public void queryTweet(String twiMid) {
+	public void queryTweet(String twiMid, List<String> mediaList) {
+		this.mediaList = mediaList;
 		try {
 			JSONObject tweet = tm.QueryId(twiMid, 1, 1);
 			this.tweetId = tweet.getString("id").toString();
@@ -61,7 +63,9 @@ public class WeiboService {
 				service.execute(new Worker(pageNo));
 			}
 			service.shutdown();
-		} catch (WeiboException | JSONException e) {
+		} catch (WeiboException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 	}
@@ -102,8 +106,10 @@ public class WeiboService {
 				tu.setRepostCount(status.getRepostsCount());
 				tu.setFollowers(user.getFollowersCount());
 				tu.setGender(user.getGender());
-				tu.setLocation(user.getLocation());
-				if(user.isVerified()) {
+				tu.setLocation(user.getLocation());				
+				if (mediaList.contains(user.getScreenName())) {
+					tu.setUserType("媒体用户");
+				} else if(user.isVerified()) {
 					tu.setUserType("认证用户");
 				} else {
 					tu.setUserType("普通用户");
