@@ -102,6 +102,13 @@ $(document).ready( function() {
     			    				shadow_color:'#c7c7c7',
     			    				width : 800,
     			    				height : 400,
+    			    				label : {
+    			    					fontsize:11,
+    			    					textAlign:'right',
+    			    					textBaseline:'middle',
+    			    					rotate:-45,
+    			    					color : '#666666'
+    			    					}, 
     			    			});
     			    			chart5.draw();
     			    			var chart6 = new iChart.Column2D({
@@ -113,6 +120,13 @@ $(document).ready( function() {
     			    				shadow_color:'#c7c7c7',
     			    				width : 800,
     			    				height : 400,
+    			    				label : {
+    			    					fontsize:11,
+    			    					textAlign:'right',
+    			    					textBaseline:'middle',
+    			    					rotate:-45,
+    			    					color : '#666666'
+    			    					}, 
     			    			});
     			    			chart6.draw();
     			    			var vuserlist = $("#vuserlist");

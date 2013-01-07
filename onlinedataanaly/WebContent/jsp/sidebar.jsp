@@ -10,5 +10,6 @@
         <li><s:a href="">微博用户活跃度分析</s:a></li>
         <s:url var="validation_url" action="validation"/>
         <li><s:a href="">焦点分析</s:a></li>
+        <li><s:a href="">北京政务微博统计</s:a></li>
       </ul>
  </div>

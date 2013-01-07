@@ -50,19 +50,19 @@
 </head>
 <body>
 <jsp:include page="top_nav.jsp"/>
-<div class="container-fluid">
-    <div class="row-fluid">
+<div class="container">
+    <div class="row">
         <div class="span3">
             <jsp:include page="sidebar.jsp"/>
         </div>
         <div class="span9">
-            <s:form theme="simple" cssClass="well form-search" action="twi!analysis" method="post">
+            <div class="well row-fluid" id="help_div">
                 <s:textfield
                         placeholder="微博 id"
                         name="twiMid" id="twiMid"/>
 				<input type="button" id="analysis" name="analysis" value="查询" class="btn"/>
 
-            </s:form>
+            </div>
             <div id="progress_div" class="progress progress-striped" style="display:none">
 			  	<div id="progress_bar" class="bar" style="width:5%"></div>
 			  </div>
@@ -142,8 +142,5 @@
       </div>
     </div>
 <!-- /container -->
-<script>
-
-</script>
 </body>
 </html>
