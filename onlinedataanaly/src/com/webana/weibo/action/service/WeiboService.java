@@ -106,7 +106,9 @@ public class WeiboService {
 				tu.setRepostCount(status.getRepostsCount());
 				tu.setFollowers(user.getFollowersCount());
 				tu.setGender(user.getGender());
-				tu.setLocation(user.getLocation());				
+				tu.setLocation(user.getLocation());
+				if("新京报".equals(user.getScreenName()))
+				System.out.println(user.getScreenName());
 				if (mediaList.contains(user.getScreenName())) {
 					tu.setUserType("媒体用户");
 				} else if(user.isVerified()) {

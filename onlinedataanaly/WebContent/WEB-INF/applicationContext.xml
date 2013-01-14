@@ -11,4 +11,6 @@
     	<property name="mediaListFile" value="classpath:medialist.txt" />
     </bean>
  	<bean id="userAction" class="com.webana.weibo.action.UserAction" />
+ 	<bean id="beijingGovAction" class="com.webana.weibo.action.BeijingGovAction" />
+ 	<bean id="aboutAction" class="com.webana.weibo.action.AboutAction" />
 </beans>

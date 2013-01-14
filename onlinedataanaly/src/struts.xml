@@ -20,6 +20,17 @@
             <result name="input">/jsp/twi.jsp</result>
             <result name="success" type="redirect">/</result>
         </action>
+        <action name="beijinggov" class="beijingGovAction">
+	        <interceptor-ref name="userInterceptor"></interceptor-ref>
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="input">/jsp/beijinggov.jsp</result>
+            <result name="success" type="redirect">/</result>
+        </action>
+        <action name="about" class="aboutAction">
+	        <interceptor-ref name="userInterceptor"></interceptor-ref>
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="input">/jsp/about.jsp</result>
+        </action>
     </package>
     <package name="ajax" extends="json-default" namespace="/ajax">
         <action name="twi" class="twiAction">

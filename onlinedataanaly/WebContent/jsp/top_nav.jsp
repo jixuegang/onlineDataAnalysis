@@ -9,9 +9,9 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <s:url var="index_url" action="index"/>
-                    <li class="active"><s:a href="/">新浪微博</s:a></li>
+                    <li id="weibo_li" class="active"><s:a href="twi.action">新浪微博</s:a></li>
                     <s:url var="about_url" action="about"/>
-                    <li><s:a href="%{about_url}">关于</s:a></li>
+                    <li id="about_li"><s:a href="about.action">关于</s:a></li>
                 </ul>
             </div>
             <div class="pull-right">

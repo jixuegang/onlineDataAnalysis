@@ -56,7 +56,7 @@
             <jsp:include page="sidebar.jsp"/>
         </div>
         <div class="span9">
-            <div class="well row-fluid" id="help_div">
+            <div class="well row-fluid" id="search_div">
                 <s:textfield
                         placeholder="微博 id"
                         name="twiMid" id="twiMid"/>
