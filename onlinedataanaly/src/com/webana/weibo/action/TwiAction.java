@@ -1,7 +1,6 @@
 package com.webana.weibo.action;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import org.springframework.core.io.Resource;
 import com.webana.weibo.action.model.PieChart;
 import com.webana.weibo.action.model.Tweet;
 import com.webana.weibo.action.service.TwiToChart;
-import com.webana.weibo.action.service.WeiboService;
+import com.webana.weibo.action.service.TwiService;
 
 /**
  *
@@ -42,7 +41,7 @@ public class TwiAction extends BaseAction {
 
     private int progress;
 
-    WeiboService weiboService;
+    TwiService weiboService;
     
     Resource  mediaListFile;
 
@@ -58,7 +57,7 @@ public class TwiAction extends BaseAction {
     }
 
     public String analysis() {
-    	weiboService = super.createWeiBoService();
+    	weiboService = super.createTwiService();
     	if(weiboService == null) {
     		this.addActionError("请先使用微博账号登录才能查询使用查询");
     	} else {
@@ -100,7 +99,7 @@ public class TwiAction extends BaseAction {
     	}
     	return "ajax";
     }
-    
+
     public void setTwiMid(String twiMid) {
 		this.twiMid = twiMid;
 	}

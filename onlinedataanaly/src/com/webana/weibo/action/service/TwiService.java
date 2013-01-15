@@ -25,9 +25,9 @@ import weibo4j.org.json.JSONObject;
  * 
  */
 
-public class WeiboService {
+public class TwiService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(WeiboService.class);
+	private static final Logger logger = LoggerFactory.getLogger(TwiService.class);
 
 
 	public static final int MAX_NUM_EACH_PAGE = 200;
@@ -44,9 +44,9 @@ public class WeiboService {
 	
 	private List<String> mediaList;
 	
-	public WeiboService(String token) {
+	public TwiService(String token) {
 		tm = new Timeline();
-		tm.setToken(token);		
+		tm.setToken(token);
 	}
 	
 	public void queryTweet(String twiMid, List<String> mediaList) {

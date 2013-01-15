@@ -12,6 +12,7 @@ $(document).ready( function() {
                if(actionErrors != "") {
 	        	   $("#error_div").css('display','block');
 	        	   $("#error_div").text(actionErrors);
+	        	   $("#progress_div").css('display','none');
                } else {	        	   
 	        	   setTimeout(pollServer,1000);
                }

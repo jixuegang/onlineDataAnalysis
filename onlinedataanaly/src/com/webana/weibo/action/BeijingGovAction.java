@@ -1,18 +1,15 @@
 package com.webana.weibo.action;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.util.Date;
+import java.util.Map;
 
-import org.springframework.core.io.Resource;
+import org.apache.struts2.ServletActionContext;
 
-import com.webana.weibo.action.model.PieChart;
-import com.webana.weibo.action.model.Tweet;
-import com.webana.weibo.action.service.TwiToChart;
-import com.webana.weibo.action.service.WeiboService;
+import com.webana.weibo.action.service.BeijingGovService;
+import com.webana.weibo.excel.ExcelWriter;
+import com.webana.weibo.excel.FileUtil;
+
 
 /**
  *
@@ -21,15 +18,69 @@ import com.webana.weibo.action.service.WeiboService;
 public class BeijingGovAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
+    
+    private BeijingGovService service;
+    
+    private int dayOfstat;
 
-	/**
+    private int progress;
+    
+    Map<String, String> filenames;
+
+	private String newFileName;
+    
+    private String newFileCreatedTime;
+
+	/**ws.generateStatExcel(rootPath);
      * @return forward to build status
      */
-    public String execute() {
-       
+    @Override
+	public String execute() {
+    	String rootPath = ServletActionContext.getServletContext().getRealPath("/");
+		String resourcePath = rootPath + File.separator + ExcelWriter.EXCEL_DEST_DIR;
+		filenames = FileUtil.listFilesWithTime(resourcePath, "xlsx");
         return INPUT;
     }
 
+	public String analysis() {
+		service = super.createBeijingGovService();
+		if (service == null) {
+			this.addActionError("请先使用微博账号登录才能查询使用查询");
+		} else {
+			String rootPath = ServletActionContext.getServletContext().getRealPath("/");
+			service.setDayOfstat(dayOfstat);
+			service.generateStatExcel(rootPath);
 
+		}
+		return "ajax";
+	}
 
+    public String progress() {
+    	progress = service.getProgress();
+    	if(progress >= 100) {
+    		newFileName = service.getNewFileName();
+    		newFileCreatedTime = FileUtil.getLocalDateFormat().format(new Date());
+    	}
+    	return "ajax";
+    }
+    
+    public int getProgress() {
+		return progress;
+	}
+
+	public Map<String, String> getFilenames() {
+		return filenames;
+	}
+
+	public String getNewFileName() {
+		return newFileName;
+	}
+
+	public String getNewFileCreatedTime() {
+		return newFileCreatedTime;
+	}
+
+	public void setDayOfstat(int dayOfstat) {
+		this.dayOfstat = dayOfstat;
+	}
 }

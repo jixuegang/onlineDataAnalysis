@@ -16,6 +16,7 @@
     <link id="bootstrap_styles" rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
     <link id="bootstrap_responsive_styles" rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css"/>
 	<script src="js/jquery-1.8.2.min.js"></script>
+	<script src="js/beijingGovQuery.js"></script>
     <style type="text/css">
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -55,7 +56,7 @@
         </div>
         <div class="span9">
             <div class="well row-fluid" id="search_div">
-                <select class="span2">
+                <select class="span2" id="dayOfstat">
                 <option>1天</option>
                 <option>2天</option>
                 <option>3天</option>
@@ -72,7 +73,7 @@
 			    <s:actionerror/>
     	    </div>
 			  
-            <div class="well row-fluid" id="chart_div">
+            <div class="well row-fluid" id="table_div">
 		      <fieldset>
 			    <legend><b>政务微博列表</b></legend>
 			       <table class="table table-striped">
@@ -83,17 +84,15 @@
 		                  <th>生成时间</th>
 		                </tr>
 		              </thead>
-		              <tbody>
+		              <tbody>						
+						<s:iterator value="filenames.descendingKeySet()" id="id" status='st'>
 		                <tr>
-		                  <td>1</td>
-		                  <td><a href="">weibodailyreport09.21.xlsx</a></td>
-		                  <td>2012-09-21 07:54:20 </td>
+		                  <td><s:property value='#st.index + 1'/> </td>
+		                  <td><a href=""><s:property value="#id"/></a></td>
+		                  <td><s:property value="filenames.get(#id)"/> </td>
 		                </tr>
-		                 <tr>
-		                  <td>2</td>
-		                  <td><a href="">weibodailyreport09.21.xlsx</a></td>
-		                  <td>2012-09-21 07:54:20 </td>
-		                </tr>
+		                </s:iterator>
+		                
 		              </tbody>
 	            </table>
                 

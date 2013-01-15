@@ -6,10 +6,10 @@ import org.apache.struts2.ServletActionContext;
 
 import weibo4j.Timeline;
 import weibo4j.Users;
-import weibo4j.Weibo;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.webana.weibo.action.service.WeiboService;
+import com.webana.weibo.action.service.BeijingGovService;
+import com.webana.weibo.action.service.TwiService;
 
 /**
  * Base action to provide basic functions for all struts action.
@@ -48,12 +48,21 @@ public class BaseAction extends ActionSupport {
 	   return tl;
    }
    
-   protected WeiboService createWeiBoService() {
+   protected TwiService createTwiService() {
 	   if (this.getSession().getAttribute("accessToken") == null) {
 		   return null;
 	   }
 	   String token = this.getSession().getAttribute("accessToken").toString();
-	   WeiboService service = new WeiboService(token);
+	   TwiService service = new TwiService(token);
+	   return service;
+   }
+   
+   protected BeijingGovService createBeijingGovService() {
+	   if (this.getSession().getAttribute("accessToken") == null) {
+		   return null;
+	   }
+	   String token = this.getSession().getAttribute("accessToken").toString();
+	   BeijingGovService service = new BeijingGovService(token);
 	   return service;
    }
 }
