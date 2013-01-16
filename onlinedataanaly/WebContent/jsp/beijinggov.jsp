@@ -57,17 +57,17 @@
         <div class="span9">
             <div class="well row-fluid" id="search_div">
                 <select class="span2" id="dayOfstat">
-                <option>1天</option>
-                <option>2天</option>
-                <option>3天</option>
-                <option>4天</option>
-                <option>5天</option>
+                <option value="1">1天</option>
+                <option value="2">2天</option>
+                <option value="3">3天</option>
+                <option value="4">4天</option>
+                <option value="5">5天</option>
               </select>
 				<input type="button" id="analysis" name="analysis" value="生成报表" class="btn"/>
 
             </div>
             <div id="progress_div" class="progress progress-striped" style="display:none">
-			  	<div id="progress_bar" class="bar" style="width:5%"></div>
+			  	<div id="progress_bar" class="bar" style="width:1%"></div>
 			  </div>
 			<div class="alert alert-error" id="error_div" style="display:none">
 			    <s:actionerror/>
@@ -84,11 +84,11 @@
 		                  <th>生成时间</th>
 		                </tr>
 		              </thead>
-		              <tbody>						
+		              <tbody id="table_data">						
 						<s:iterator value="filenames.descendingKeySet()" id="id" status='st'>
-		                <tr>
+		                <tr id="row<s:property value='#st.index + 1'/>">
 		                  <td><s:property value='#st.index + 1'/> </td>
-		                  <td><a href=""><s:property value="#id"/></a></td>
+		                  <td><a href="download?path=resources/<s:property value="#id"/>"><s:property value="#id"/></a></td>
 		                  <td><s:property value="filenames.get(#id)"/> </td>
 		                </tr>
 		                </s:iterator>

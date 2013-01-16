@@ -145,9 +145,9 @@ public class ExcelWriter {
              return false;
          }
      }
-	 
+
 	private String mkFileName(Date date) {
-        String DATE_FORMAT = "MM.dd";        
+        String DATE_FORMAT = "MM.dd";
         TimeZone timeZoneNY = TimeZone.getTimeZone("GMT+8");
 		 SimpleDateFormat outputFormat = new SimpleDateFormat(DATE_FORMAT, Locale.CHINA);
 		 outputFormat.setTimeZone(timeZoneNY);

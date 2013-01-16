@@ -33,7 +33,14 @@
         <filter-name>struts2</filter-name>
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
-
+	<servlet>
+    <servlet-name>FileDownload</servlet-name>
+    <servlet-class>com.webana.weibo.excel.FileDownload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>FileDownload</servlet-name>
+	    <url-pattern>/download</url-pattern>
+	</servlet-mapping>
     <!-- set the session time out as never -->
     <session-config>
         <session-timeout>0</session-timeout>

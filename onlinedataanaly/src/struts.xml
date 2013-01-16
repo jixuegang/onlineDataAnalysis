@@ -36,7 +36,7 @@
         <action name="twi" class="twiAction">
             <result name="ajax" type="json" />
         </action>
-        <action name="beijinggov" class="twiAction">
+        <action name="beijinggov" class="beijingGovAction">
             <result name="ajax" type="json" />
         </action>
     </package>

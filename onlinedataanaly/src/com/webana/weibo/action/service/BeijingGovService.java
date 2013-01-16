@@ -18,7 +18,6 @@ import com.webana.weibo.excel.FileUtil;
 import weibo4j.Account;
 import weibo4j.Timeline;
 import weibo4j.Users;
-import weibo4j.Weibo;
 import weibo4j.model.Paging;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
@@ -33,10 +32,9 @@ import weibo4j.model.WeiboException;
 
 public class BeijingGovService {
 	private String accessToken;
-	private Weibo weibo;
 	Users um;
 	Timeline tm;
-	Account am;
+	//Account am;
 	int dayOfstat = 1;
 	private static final Logger logger = LoggerFactory.getLogger(BeijingGovService.class);
 	public static final int MAX_NEW_NUM = 120;
@@ -51,11 +49,11 @@ public class BeijingGovService {
 
 	public BeijingGovService(String token) {
 		this.accessToken = token;
-		weibo = new Weibo();
-		weibo.setToken(accessToken);
 		um = new Users();
+		um.setToken(accessToken);
 		tm = new Timeline();
-		am = new Account();
+		tm.setToken(accessToken);
+		//am = new Account();
 	}
 
 	private UserEntry getUserByScreenName(String sn) {

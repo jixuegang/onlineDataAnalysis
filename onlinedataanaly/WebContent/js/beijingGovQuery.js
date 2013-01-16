@@ -7,11 +7,11 @@ $(document).ready( function() {
            function(data){
         	   var res = eval(data);
                var actionErrors = res.actionErrors;
-               if(actionErrors != "") {
+               if(typeof(actionErrors) != "undefined" && actionErrors != "") {
 	        	   $("#error_div").css('display','block');
 	        	   $("#error_div").text(actionErrors);
 	        	   $("#progress_div").css('display','none');
-               } else {	        	   
+               } else {
 	        	   setTimeout(pollServer,1000);
                }
             },
@@ -32,9 +32,15 @@ $(document).ready( function() {
     		            	   $("#progress_div").css('display','none');
     		            	   var newFileName = res.newFileName;
     		            	   var newFileCreatedTime = res.newFileCreatedTime;
-    			               $("#twiText").text(twiText);
-    		            	   $("#table_div").css('display','block');
-
+    		            	   var tr = $("#row1").clone(true);
+    		                   tr.children().eq(1).html("<a href='download?path=resources/"+newFileName+"'><B>"+newFileName+"</B></a>");
+    		                   tr.children().eq(2).html(newFileCreatedTime);
+    		                   tr.insertAfter("#table_div tr:first");
+    		                   
+    		                   var count=$("#table_data tr").length;
+    		                   for(var i=0;i<count;i++){
+    		                	   $("#table_data tr").eq(i).children().eq(0).html((i+2));
+    		                   }
     		               }
     		            },
     		            'json'

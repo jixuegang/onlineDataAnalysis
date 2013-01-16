@@ -58,7 +58,7 @@ public class BeijingGovAction extends BaseAction {
     public String progress() {
     	progress = service.getProgress();
     	if(progress >= 100) {
-    		newFileName = service.getNewFileName();
+    		newFileName = new File(service.getNewFileName()).getName();
     		newFileCreatedTime = FileUtil.getLocalDateFormat().format(new Date());
     	}
     	return "ajax";

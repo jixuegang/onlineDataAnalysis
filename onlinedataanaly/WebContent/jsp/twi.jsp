@@ -64,7 +64,7 @@
 
             </div>
             <div id="progress_div" class="progress progress-striped" style="display:none">
-			  	<div id="progress_bar" class="bar" style="width:5%"></div>
+			  	<div id="progress_bar" class="bar" style="width:1%"></div>
 			  </div>
 			<div class="alert alert-error" id="error_div" style="display:none">
 			    <s:actionerror/>
