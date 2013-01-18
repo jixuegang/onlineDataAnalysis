@@ -17,7 +17,8 @@
     <link id="bootstrap_responsive_styles" rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css"/>
     <script src="js/ichart-1.0.min.js"></script>
 	<script src="js/jquery-1.8.2.min.js"></script>
-	<script src="js/twiChartQuery.js"></script>	
+	<script src="js/twiChartQuery.js"></script>
+
     <style type="text/css">
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */

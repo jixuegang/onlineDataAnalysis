@@ -12,8 +12,10 @@
                     <li id="weibo_li" class="active"><s:a href="twi.action">新浪微博</s:a></li>
                     <s:url var="about_url" action="about"/>
                     <li id="about_li"><s:a href="about.action">关于</s:a></li>
+                    <li style="margin-top:10px"><iframe width="63" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=63&height=24&uid=1707591963&style=1&btn=red&dpc=1"></iframe></li>
                 </ul>
             </div>
+           
             <div class="pull-right">
 				<ul class="nav nav-pills pull-right">
 				 <c:choose>
@@ -31,3 +33,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

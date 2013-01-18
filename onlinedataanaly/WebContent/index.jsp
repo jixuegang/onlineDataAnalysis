@@ -1,1 +1,1 @@
-<% response.sendRedirect("twi.action"); %>
+<% response.sendRedirect("index.action"); %>

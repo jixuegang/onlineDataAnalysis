@@ -5,10 +5,12 @@
 <struts>
     <constant name="struts.objectFactory" value="spring" />
 
-    <package name="weibo" extends="struts-default"  namespace="/">
+    <package name="weibo" extends="struts-default"  namespace="/">   
     <interceptors>
             <interceptor name="userInterceptor" class="com.webana.weibo.action.service.AuthorizationInterceptor"></interceptor>
      </interceptors>
+      <default-action-ref name="twi" />
+    
      	<action name="user" class="userAction">
         	<interceptor-ref name="defaultStack"></interceptor-ref>
         	<interceptor-ref name="userInterceptor"></interceptor-ref>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=401389787" type="text/javascript" charset="utf-8"></script>
  <div class="well sidebar-nav">
      <ul class="nav nav-list">
         <li class="nav-header"></li>
