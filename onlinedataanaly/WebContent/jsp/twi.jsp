@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>网络舆情分析</title>
+    <title>网络数据分析</title>
     <meta charset="UTF-8" />
     <meta name="keywords" content="舆情，数据抓取，微博，社交，数据分析" />
-    <meta name="description" content="网络舆情分析，采集微博， 人人等网站数据进行舆情传播分析" />
+    <meta name="description" content="舆情分析，采集微博， 人人等网站数据进行舆情传播分析" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -137,11 +137,7 @@
         </div>
     </div>
 </div>
-	<div id="footer">
-      <div class="footercontainer ">
-        <p class="muted credit"> Copyright © 2012-2013 <a href="mailto:jixuegang@gmail.com">jixuegang</a>.</p>
-      </div>
-    </div>
+	<jsp:include page="footer.jsp"/>
 <!-- /container -->
 </body>
 </html>
