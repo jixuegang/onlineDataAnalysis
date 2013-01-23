@@ -58,9 +58,8 @@
         </div>
         <div class="span9">
             <div class="well row-fluid" id="search_div">
-                <s:textfield
-                        placeholder="微博 id"
-                        name="twiMid" id="twiMid"/>
+            <input type="text" name="twiMid" value="<s:property value="#parameters.twiMid"/>" id="twiMid" placeholder="微博 id"/>
+               
 				<input type="button" id="analysis" name="analysis" value="查询" class="btn"/>
 
             </div>

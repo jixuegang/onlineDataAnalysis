@@ -1,15 +1,16 @@
 $(document).ready( function() {
+	var posturl = 'ajax/twi!analysis.action';
 	$("#analysis").click( function() {
 	    $("#progress_div").css('display','block');
  	    $("#chart_div").css('display','none');
  	    $("#help_div").css('display','none');
         $.post(
-           'ajax/twi!analysis.action',
+        	posturl,
            {twiMid :$("#twiMid").val()},
            function(data){
         	   var res = eval(data);
                var actionErrors = res.actionErrors;
-               if(actionErrors != "") {
+               if(typeof(actionErrors) != "undefined" && actionErrors != "") {
 	        	   $("#error_div").css('display','block');
 	        	   $("#error_div").text(actionErrors);
 	        	   $("#progress_div").css('display','none');
@@ -23,7 +24,6 @@ $(document).ready( function() {
         function pollServer(){
     		$.post(
     		           'ajax/twi!progress.action',
-    		          
     		           {twiMid :$("#twiMid").val()},
     		           function(data){
     		               var res = eval(data);
@@ -43,7 +43,7 @@ $(document).ready( function() {
     			               var topRepostData = res.topRepostData;
     			               var topFollowersData = res.topFollowersData;
     			               var verifiedUsers = res.verifiedUsers;
-    			               
+
     			               iChart(function(){
     			            	 var chart1 = new iChart.Pie2D({
        			           			background_color : '#EFEFEF',
@@ -52,8 +52,8 @@ $(document).ready( function() {
        			           			title : '转发/评论比率',
        			           			shadow:true,
        			           			shadow_color:'#c7c7c7',
-    			    				sub_option:{ 
-			    						mini_label : true,    			    						
+    			    				sub_option:{
+			    						mini_label : true,
     			    				}
        			           		});
        			           		chart1.draw();
@@ -146,8 +146,10 @@ $(document).ready( function() {
     		        );
     	}
         
-        
     });
-	
 
+	if(typeof($("#twiMid").val()) != "undefined" && $("#twiMid").val() != "") {
+		posturl = 'ajax/twi!chart.action';
+		$("#analysis").click();
+	}
 });

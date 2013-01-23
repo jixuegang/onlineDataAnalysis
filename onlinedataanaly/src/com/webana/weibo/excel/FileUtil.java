@@ -3,15 +3,15 @@ package com.webana.weibo.excel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -81,4 +81,39 @@ public class FileUtil {
 		return outputFormat;
 	}
 
+	public static String readTxtFile(File filename) {
+		String read;
+		FileReader fileread;
+		String readStr = "";
+		try {
+			fileread = new FileReader(filename);
+			BufferedReader bufread = new BufferedReader(fileread);
+			while ((read = bufread.readLine()) != null) {
+				readStr = readStr + read + "\r\n";
+			}
+			bufread.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return readStr;
+	}
+
+	public static void writeTxtFile(File filename, String text) throws IOException{
+        String filein = text;
+        RandomAccessFile mm = null;
+        try {
+            mm = new RandomAccessFile(filename, "rw");
+            mm.writeBytes(filein);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } finally {
+            if (mm != null) {
+                try {
+                    mm.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+            }
+        }
+	}
 }
