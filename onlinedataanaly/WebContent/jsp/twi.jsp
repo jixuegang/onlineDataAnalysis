@@ -17,7 +17,9 @@
     <link id="bootstrap_responsive_styles" rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css"/>
     <script src="js/ichart-1.0.min.js"></script>
 	<script src="js/jquery-1.8.2.min.js"></script>
-	<script src="js/twiChartQuery.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script src="js/twiChartQuery2.js"></script>
 
     <style type="text/css">
         body {
@@ -117,7 +119,7 @@
 		        <div class="span5">
                 <div id='repostSex'></div>
 		        </div>
-		        <div class="span5">
+		        <div class="span6">
 		         <div id='repostLocation'></div>
 		        </div>
 		        <legend><b>关键用户分析</b></legend>

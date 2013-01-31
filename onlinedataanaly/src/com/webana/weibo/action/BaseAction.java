@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import weibo4j.Timeline;
 import weibo4j.Users;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.webana.weibo.action.service.BeijingGovService;
 import com.webana.weibo.action.service.TwiService;
@@ -64,5 +65,13 @@ public class BaseAction extends ActionSupport {
 	   String token = this.getSession().getAttribute("accessToken").toString();
 	   BeijingGovService service = new BeijingGovService(token);
 	   return service;
+   }
+   
+   protected void setApplicationAttibute(String name, Object value) {
+	   ActionContext.getContext().getApplication().put(name, value);
+   }
+   
+   protected Object getApplicationAttibute(String name) {
+	   return ActionContext.getContext().getApplication().get(name);
    }
 }

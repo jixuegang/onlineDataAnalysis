@@ -10,7 +10,9 @@
     	<aop:scoped-proxy/>
     	<property name="mediaListFile" value="classpath:medialist.txt" />
     </bean>
- 	<bean id="userAction" class="com.webana.weibo.action.UserAction" />
- 	<bean id="beijingGovAction" class="com.webana.weibo.action.BeijingGovAction" />
+ 	<bean id="userAction" class="com.webana.weibo.action.UserAction"  scope="prototype" />
+ 	<bean id="beijingGovAction" class="com.webana.weibo.action.BeijingGovAction" scope="session">
+    	<aop:scoped-proxy/>
+    </bean>
  	<bean id="aboutAction" class="com.webana.weibo.action.AboutAction" />
 </beans>

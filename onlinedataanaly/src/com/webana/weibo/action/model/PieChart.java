@@ -8,13 +8,13 @@ public final class PieChart {
 
     private String name;
     
-    private int value;
+    private int y;
 
 	private String color;
     
 	public PieChart(String name, int value, String color) {
 		this.name = name;
-		this.value = value;
+		this.y = value;
 		this.color = color;
 	}
 	
@@ -26,20 +26,20 @@ public final class PieChart {
 		this.name = name;
 	}
 
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-
 	public String getColor() {
 		return color;
 	}
 
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 

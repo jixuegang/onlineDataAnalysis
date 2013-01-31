@@ -26,6 +26,8 @@ public class TwiToChart {
 
 	public static String[] COLOR = {"#a5c2d5", "#cbab4f", "#76a871", "#a56f8f", "#c12c44",
 		"#a56f8f", "#9f7961", "#76a871", "#6f83a5", "#a56f9f"};
+//	"#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+//	"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"
 
     private TreeMap<String, Integer> userTypeMap = new TreeMap<String, Integer>();
     

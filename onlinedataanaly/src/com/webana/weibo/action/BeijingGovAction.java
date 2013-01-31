@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.webana.weibo.action.service.BeijingGovService;
 import com.webana.weibo.excel.ExcelWriter;
 import com.webana.weibo.excel.FileUtil;
@@ -18,6 +19,8 @@ import com.webana.weibo.excel.FileUtil;
 public class BeijingGovAction extends BaseAction {
 
     private static final long serialVersionUID = 1L;
+    
+    private static final String  REPORT_RUNNING = "reportIsrunning";
     
     private BeijingGovService service;
     
@@ -45,8 +48,17 @@ public class BeijingGovAction extends BaseAction {
 	public String analysis() {
 		service = super.createBeijingGovService();
 		if (service == null) {
-			this.addActionError("请先使用微博账号登录才能查询使用查询");
+			this.addActionError("请先使用微博账号登录才能查询使用查询");			
 		} else {
+			if(progress > 0 && progress < 100) {
+				this.addActionError("正在生成报表，请勿重复提交");
+				return "ajax";
+			}
+			if(super.getApplicationAttibute(REPORT_RUNNING) != null && (Boolean)super.getApplicationAttibute(REPORT_RUNNING) == true) {
+				this.addActionError("正在生成报表，请稍后刷新页面查看");
+				return "ajax";
+			}
+			super.setApplicationAttibute(REPORT_RUNNING, true);			
 			String rootPath = ServletActionContext.getServletContext().getRealPath("/");
 			service.setDayOfstat(dayOfstat);
 			service.generateStatExcel(rootPath);
@@ -60,6 +72,7 @@ public class BeijingGovAction extends BaseAction {
     	if(progress >= 100) {
     		newFileName = new File(service.getNewFileName()).getName();
     		newFileCreatedTime = FileUtil.getLocalDateFormat().format(new Date());
+    		super.setApplicationAttibute("reportIsrunning", false);
     	}
     	return "ajax";
     }
