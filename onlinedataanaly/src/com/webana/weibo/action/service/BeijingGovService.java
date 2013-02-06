@@ -14,6 +14,7 @@ import com.webana.weibo.action.model.TopicEntry;
 import com.webana.weibo.action.model.UserEntry;
 import com.webana.weibo.excel.ExcelWriter;
 import com.webana.weibo.excel.FileUtil;
+import com.webana.weibo.util.Constants;
 
 import weibo4j.Account;
 import weibo4j.Timeline;
@@ -53,7 +54,6 @@ public class BeijingGovService {
 		um.setToken(accessToken);
 		tm = new Timeline();
 		tm.setToken(accessToken);
-		//am = new Account();
 	}
 
 	private UserEntry getUserByScreenName(String sn) {
@@ -140,22 +140,24 @@ public class BeijingGovService {
 	}
 	
 	
-	private List<File> listGovListFiles(String rootPath){		
-		List<File> files = FileUtil.listFiles(rootPath + File.separator + ExcelWriter.GOV_LIST_DIR, "txt", LIST_CONFIG_STARTWITH);
+	private List<File> listGovListFiles(String parentPath){		
+		List<File> files = FileUtil.listFiles(parentPath + File.separator + Constants.GOV_LIST_DIR, "txt", LIST_CONFIG_STARTWITH);
 		return files;
 	}
-	
-	public void generateStatExcel(final String rootPath) {
+
+	public void generateStatExcel(String rootPath) {
 		logger.info("generateStatExcel.....");
+		final String excelPath = rootPath + Constants.EXCEL_DEST_DIR;
+		final String listPath = rootPath;
 		new Thread() {
 			public void run() {
 				List<List<String>> sheets = new ArrayList<List<String>>();
-				List<File> files = listGovListFiles(rootPath);
+				List<File> files = listGovListFiles(listPath);
 				for (File file:files){
 					sheets.add(FileUtil.readFileByLines(file.getAbsolutePath()));
 				}
 				ExcelWriter ew = new ExcelWriter();
-				ew.initExcel(rootPath, dayOfstat);
+				ew.initExcel(excelPath, dayOfstat);
 				List<UserEntry> totalEntries = new ArrayList<UserEntry>();
 				for (int n = 0; n < sheets.size(); n++) {
 					List<String> screenNames = sheets.get(n);

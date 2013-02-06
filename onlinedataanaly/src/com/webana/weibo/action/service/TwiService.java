@@ -39,7 +39,7 @@ public class TwiService {
 	private Tweet twi;
 
 	private String tweetId;
-	
+
 	private int finishedPages = 1;
 	
 	private List<String> mediaList;
@@ -49,12 +49,12 @@ public class TwiService {
 		tm.setToken(token);
 	}
 	
-	public void queryTweet(String twiMid, List<String> mediaList) {
+	public void queryTweet(String twiMid, String uid, List<String> mediaList) {
 		this.mediaList = mediaList;
 		try {
 			JSONObject tweet = tm.QueryId(twiMid, 1, 1);
 			this.tweetId = tweet.getString("id").toString();
-			this.twi = new Tweet(twiMid);
+			this.twi = new Tweet(twiMid, uid);
 			queryTweet(1);// query first page
 			int totalNumber = twi.getRepostCount();
 			
@@ -107,8 +107,6 @@ public class TwiService {
 				tu.setFollowers(user.getFollowersCount());
 				tu.setGender(user.getGender());
 				tu.setLocation(user.getLocation());
-				if("新京报".equals(user.getScreenName()))
-				System.out.println(user.getScreenName());
 				if (mediaList.contains(user.getScreenName())) {
 					tu.setUserType("媒体用户");
 				} else if(user.isVerified()) {
@@ -124,7 +122,7 @@ public class TwiService {
 			finishedPages++;
 		}
 	}
-	
+
 	public int getProgress() {
 		return  (MAX_NUM_EACH_PAGE*finishedPages) * 100 / twi.getRepostCount();
 	}

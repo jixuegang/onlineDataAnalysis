@@ -9,7 +9,7 @@
     <interceptors>
             <interceptor name="userInterceptor" class="com.webana.weibo.action.service.AuthorizationInterceptor"></interceptor>
      </interceptors>
-      <default-action-ref name="twi" />
+      <default-action-ref name="hottwi" />
     
      	<action name="user" class="userAction">
         	<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -21,6 +21,11 @@
 	        <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="input">/jsp/twi.jsp</result>
             <result name="success" type="redirect">/</result>
+        </action>
+        <action name="hottwi" class="hottwiAction">
+	        <interceptor-ref name="userInterceptor"></interceptor-ref>
+	        <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="input">/jsp/hottwi.jsp</result>
         </action>
         <action name="beijinggov" class="beijingGovAction">
 	        <interceptor-ref name="userInterceptor"></interceptor-ref>

@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.webana.weibo.action.model.UserEntry;
+import com.webana.weibo.util.Constants;
 
 
 
@@ -34,15 +35,13 @@ public class ExcelWriter {
 	
 	public static final String EXCEL_PREFIX = "weibodailyreport";
 	Workbook wb;
-	String rootPath = "";
+	String excelRootPath = "";
 	int dayofstat = 1;
 	private static final Logger logger = LoggerFactory.getLogger(ExcelWriter.class);
-	public static final String EXCEL_DEST_DIR = "resources";
-	public static final String GOV_LIST_DIR = "resources";
 
-	public void initExcel(String rootPath, int dayofstat){
+	public void initExcel(String excelRootPath, int dayofstat){
 		wb = new XSSFWorkbook();
-		this.rootPath = rootPath;
+		this.excelRootPath = excelRootPath;
 		this.dayofstat = dayofstat;
 	}
 	public void writeMostHotTopics(List<UserEntry> ues){
@@ -151,7 +150,7 @@ public class ExcelWriter {
         TimeZone timeZoneNY = TimeZone.getTimeZone("GMT+8");
 		 SimpleDateFormat outputFormat = new SimpleDateFormat(DATE_FORMAT, Locale.CHINA);
 		 outputFormat.setTimeZone(timeZoneNY);
-        String filename = rootPath + File.separator + EXCEL_DEST_DIR + File.separator + EXCEL_PREFIX + outputFormat.format(date) + ".xlsx";
+        String filename = excelRootPath + File.separator + EXCEL_PREFIX + outputFormat.format(date) + ".xlsx";
         return filename;
 	}
 	

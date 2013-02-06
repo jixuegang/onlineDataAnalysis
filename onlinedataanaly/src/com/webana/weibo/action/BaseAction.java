@@ -1,5 +1,7 @@
 package com.webana.weibo.action;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -73,5 +75,9 @@ public class BaseAction extends ActionSupport {
    
    protected Object getApplicationAttibute(String name) {
 	   return ActionContext.getContext().getApplication().get(name);
+   }
+   
+   protected String getResourceRootPath() {
+		return ServletActionContext.getServletContext().getRealPath("/") + "resources"  + File.separator;
    }
 }

@@ -15,7 +15,6 @@
     <![endif]-->
     <link id="bootstrap_styles" rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
     <link id="bootstrap_responsive_styles" rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css"/>
-    <script src="js/ichart-1.0.min.js"></script>
 	<script src="js/jquery-1.8.2.min.js"></script>
 	<script src="http://code.highcharts.com/highcharts.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -60,20 +59,20 @@
         </div>
         <div class="span9">
             <div class="well row-fluid" id="search_div">
-            <input type="text" name="twiMid" value="<s:property value="#parameters.twiMid"/>" id="twiMid" placeholder="微博 id"/>
-               
-				<input type="button" id="analysis" name="analysis" value="查询" class="btn"/>
-
+            <form class="form-search">
+            <input class="input-medium search-query" style="width:400px" type="text" name="twiMid" value="<s:property value="#parameters.twiMid"/>" id="twiMid" placeholder="微博 url"/>
+               <input type="button" id="analysis" name="analysis" value="开始分析" class="btn"/>
+            </form>
             </div>
             <div id="progress_div" class="progress progress-striped" style="display:none">
 			  	<div id="progress_bar" class="bar" style="width:1%"></div>
 			  </div>
 			<div class="alert alert-error" id="error_div" style="display:none">
-			    <s:actionerror/>
+			    <s:property value="errorMsg"/>
     	    </div>
 		    <div class="well row-fluid" id="help_div">
 		    <fieldset>
-		      <legend><b>如何获取微博id</b></legend>
+		      <legend><b>如何获取微博url</b></legend>
 			  <div class="row-fluid">
 	            <ul class="thumbnails">
 	              <li class="span10">
@@ -96,7 +95,7 @@
 	                <div class="thumbnail">
 	                  <img alt="300x200" src="images/url.jpg">
 	                  <div class="caption">
-	                    <p><span class="badge badge-info">3</span> 浏览器地址栏里面的最后一个参数"zcMAFsOYz"即是微博ID.</p>
+	                    <p><span class="badge badge-info">3</span> 复制浏览器地址栏的微博url.</p>
 	                  </div>
 	                </div>
 	              </li>

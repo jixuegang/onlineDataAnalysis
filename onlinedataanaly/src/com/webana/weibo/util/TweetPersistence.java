@@ -11,6 +11,7 @@ import com.webana.weibo.action.model.Tweet;
 import com.webana.weibo.excel.FileUtil;
 
 public class TweetPersistence {
+
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	public void writeEntityJSON(Tweet bean, String fileName) {

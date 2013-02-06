@@ -6,6 +6,8 @@ import java.util.List;
 public class Tweet {
 
 	private String twiMid;
+	
+	private String uid;
 
 	private String text;
 	
@@ -15,8 +17,12 @@ public class Tweet {
 	
 	private List<TwiUsers> users = new ArrayList<TwiUsers>();
 
-	public Tweet(String twiMid) {
+	public Tweet() {
+	}
+
+	public Tweet(String twiMid, String uid) {
 		this.twiMid = twiMid;
+		this.uid = uid;
 	}
 	public String getText() {
 		return text;
@@ -57,4 +63,14 @@ public class Tweet {
 	public void setTwiMid(String twiMid) {
 		this.twiMid = twiMid;
 	}
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+	
+	
 }

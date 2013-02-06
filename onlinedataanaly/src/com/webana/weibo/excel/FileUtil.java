@@ -58,7 +58,7 @@ public class FileUtil {
 	        return files;
 	    }
 	 
-	 public static Map<String, String> listFilesWithTime(String path, String suffix) {
+	 public static TreeMap<String, String> listFilesWithTime(String path, String suffix) {
 		 TreeMap<String, String> files = new TreeMap<String, String>();
 		 File file = new File(path);
 	        File[] fs = file.listFiles();
@@ -68,7 +68,7 @@ public class FileUtil {
 	        		long time = f.lastModified();
 	        		Date date = new Date(time);
 	        		String lastModifiedDate = getLocalDateFormat().format(date);
-	        		files.put(f.getName(),lastModifiedDate);
+	        		files.put(lastModifiedDate, f.getName());
 	        	}
 	        }
 	        return files;

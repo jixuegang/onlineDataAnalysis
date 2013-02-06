@@ -6,8 +6,8 @@ $(document).ready( function() {
            {dayOfstat :$("#dayOfstat").val()},
            function(data){
         	   var res = eval(data);
-               var actionErrors = res.actionErrors;
-               if(typeof(actionErrors) != "undefined" && actionErrors != "") {
+        	   var actionErrors = res.errorMsg;
+               if(actionErrors != null && typeof(actionErrors) != "undefined" && actionErrors != "") {
 	        	   $("#error_div").css('display','block');
 	        	   $("#error_div").text(actionErrors);
 	        	   $("#progress_div").css('display','none');
@@ -33,7 +33,7 @@ $(document).ready( function() {
     		            	   var newFileName = res.newFileName;
     		            	   var newFileCreatedTime = res.newFileCreatedTime;
     		            	   var tr = $("#row1").clone(true);
-    		                   tr.children().eq(1).html("<a href='download?path=resources/"+newFileName+"'><B>"+newFileName+"</B></a>");
+    		                   tr.children().eq(1).html("<a href='download?path=resources/beijinggov/"+newFileName+"'><B>"+newFileName+"</B></a>");
     		                   tr.children().eq(2).html(newFileCreatedTime);
     		                   tr.insertAfter("#table_div tr:first");
     		                   
@@ -46,7 +46,6 @@ $(document).ready( function() {
     		            'json'
     		        );
     	}
-        
         
     });
 	

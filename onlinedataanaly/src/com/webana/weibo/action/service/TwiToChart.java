@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.webana.weibo.action.model.PieChart;
 import com.webana.weibo.action.model.Tweet;
 import com.webana.weibo.action.model.TwiUsers;
+import com.webana.weibo.util.Constants;
 
 /**
  * 
@@ -24,10 +25,8 @@ public class TwiToChart {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TwiToChart.class);
 
-	public static String[] COLOR = {"#a5c2d5", "#cbab4f", "#76a871", "#a56f8f", "#c12c44",
-		"#a56f8f", "#9f7961", "#76a871", "#6f83a5", "#a56f9f"};
-//	"#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
-//	"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"
+//	public static String[] COLOR = {"#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
+//		"#55BF3B", "#DF5353", "#7798BF"};
 
     private TreeMap<String, Integer> userTypeMap = new TreeMap<String, Integer>();
     
@@ -53,12 +52,12 @@ public class TwiToChart {
     		String location1 = user.getGender()!=null?user.getLocation().split(" ")[0]:user.getLocation();
     		locationMap.put(location1, locationMap.containsKey(location1)? (locationMap.get(location1) + 1) : 1);
 
-    		if(repostMap.keySet().size() >= 10 ) {
+    		if(repostMap.keySet().size() >= Constants.TWI_REPOST_COUNT ) {
     			addNewUserReplaceMinOne(repostMap, user.getRepostCount(), user.getScreenName());
     		} else {
     			repostMap.put(user.getScreenName(), user.getRepostCount());
     		}
-    		if(followersMap.keySet().size() >= 10 ) {
+    		if(followersMap.keySet().size() >= Constants.TWI_COMMENT_COUNT ) {
     			addNewUserReplaceMinOne(followersMap, user.getFollowers(), user.getScreenName());
     		} else {
     			followersMap.put(user.getScreenName(), user.getFollowers());
@@ -78,7 +77,7 @@ public class TwiToChart {
         for (int i = 0; i < arrayList.size(); i++) {
         	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
         	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
-        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	PieChart chart = new PieChart(name, value);
         	chartdatas.add(chart);
         }
         return chartdatas;
@@ -93,7 +92,7 @@ public class TwiToChart {
         for (int i = 0; i < arrayList.size(); i++) {
         	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
         	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
-        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	PieChart chart = new PieChart(name, value);
         	chartdatas.add(chart);
         }
         return chartdatas;
@@ -122,7 +121,7 @@ public class TwiToChart {
         for (int i = 0; i < arrayList.size(); i++) {
         	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
         	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
-        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	PieChart chart = new PieChart(name, value);
         	chartdatas.add(chart);
         }
         return chartdatas;
@@ -131,8 +130,8 @@ public class TwiToChart {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<PieChart> getRepostRatioChart() {    	
         List<PieChart> chartdatas = new ArrayList<PieChart>();        
-    	chartdatas.add(new PieChart("转发", twi.getRepostCount(), COLOR[0]));
-    	chartdatas.add(new PieChart("评论", twi.getCommentCount(), COLOR[1]));
+    	chartdatas.add(new PieChart("转发", twi.getRepostCount()));
+    	chartdatas.add(new PieChart("评论", twi.getCommentCount()));
         return chartdatas;
     }
     
@@ -145,7 +144,7 @@ public class TwiToChart {
         for (int i = 0; i < arrayList.size(); i++) {
         	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
         	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
-        	PieChart chart = new PieChart(name.equals("m")?"男":"女", value, COLOR[i]);
+        	PieChart chart = new PieChart(name.equals("m")?"男":"女", value);
         	chartdatas.add(chart);
         }
         return chartdatas;
@@ -157,10 +156,10 @@ public class TwiToChart {
 		List arrayList = new ArrayList(locationMap.entrySet());
         Collections.sort(arrayList, c);
         List<PieChart> chartdatas = new ArrayList<PieChart>();
-        for (int i = 0; i < arrayList.size() && i < COLOR.length; i++) {
+        for (int i = 0; i < arrayList.size() && i<Constants.TWI_LOCATION_COUNT; i++) {
         	String name = ((Map.Entry) arrayList.get(i)).getKey().toString();
         	int value = (Integer)(((Map.Entry) arrayList.get(i)).getValue());
-        	PieChart chart = new PieChart(name, value, COLOR[i]);
+        	PieChart chart = new PieChart(name, value);
         	chartdatas.add(chart);
         }
         return chartdatas;

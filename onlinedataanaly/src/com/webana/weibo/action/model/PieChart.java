@@ -9,13 +9,10 @@ public final class PieChart {
     private String name;
     
     private int y;
-
-	private String color;
     
-	public PieChart(String name, int value, String color) {
+	public PieChart(String name, int value) {
 		this.name = name;
 		this.y = value;
-		this.color = color;
 	}
 	
     public String getName() {
@@ -24,14 +21,6 @@ public final class PieChart {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
 	}
 
 	public int getY() {

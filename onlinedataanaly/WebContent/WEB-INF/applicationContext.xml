@@ -11,6 +11,7 @@
     	<property name="mediaListFile" value="classpath:medialist.txt" />
     </bean>
  	<bean id="userAction" class="com.webana.weibo.action.UserAction"  scope="prototype" />
+ 	<bean id="hottwiAction" class="com.webana.weibo.action.HotTwiAction"  scope="prototype" />
  	<bean id="beijingGovAction" class="com.webana.weibo.action.BeijingGovAction" scope="session">
     	<aop:scoped-proxy/>
     </bean>

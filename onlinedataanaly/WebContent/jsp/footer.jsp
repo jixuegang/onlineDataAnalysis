@@ -4,6 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="footer">
       <div class="footercontainer ">
-        <p class="muted credit"> Copyright © 2012-2013 <a href="mailto:jixuegang@gmail.com">weiboana</a>.</p>
+        <p class="muted credit"> Copyright © 2012-2013 <a href="mailto:jixuegang@gmail.com">dataana</a>.</p>
       </div>
     </div>

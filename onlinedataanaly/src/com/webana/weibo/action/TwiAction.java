@@ -1,6 +1,7 @@
 package com.webana.weibo.action;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import com.webana.weibo.action.model.PieChart;
 import com.webana.weibo.action.model.Tweet;
 import com.webana.weibo.action.service.TwiToChart;
 import com.webana.weibo.action.service.TwiService;
+import com.webana.weibo.util.Constants;
 import com.webana.weibo.util.TweetPersistence;
+import com.webana.weibo.util.WeiboUtil;
 
 /**
  *
@@ -23,6 +26,8 @@ public class TwiAction extends BaseAction {
     private static final long serialVersionUID = 1L;
 
     private String twiMid;
+    
+    private String uid;
     
     private String twiText;
     
@@ -45,6 +50,8 @@ public class TwiAction extends BaseAction {
     TwiService weiboService;
     
     Resource  mediaListFile;
+    
+    private String errorMsg;
 
 	public static final int MAX_NEW_NUM = 200;
 
@@ -53,14 +60,17 @@ public class TwiAction extends BaseAction {
      * @return forward to build status
      */
     public String execute() {
-       
+    	progress = 0;
+    	weiboService = null;
+    	this.errorMsg = null;
         return INPUT;
     }
 
 	public String analysis() {
+    	this.errorMsg = null;
 		weiboService = super.createTwiService();
 		if (weiboService == null) {
-			this.addActionError("请先使用微博账号登录才能查询使用查询");
+			errorMsg = "请先使用微博账号登录才能使用分析功能";
 			return "ajax";
 		}
 		List<String> medias = new ArrayList<String>();
@@ -72,7 +82,7 @@ public class TwiAction extends BaseAction {
 				medias.add(line);
 				line = reader.readLine();
 			}
-			weiboService.queryTweet(twiMid, medias);
+			weiboService.queryTweet(twiMid, this.uid, medias);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,8 +92,10 @@ public class TwiAction extends BaseAction {
 
 	public String progress() {
 		Tweet twi = null;
+		String twiPath = getResourceRootPath() + Constants.TWIT_FILE_DIR;
 		if (weiboService == null) {
-			twi = new TweetPersistence().readJson2Entity(twiMid + ".txt");
+			twi = new TweetPersistence().readJson2Entity(twiPath + File.separator + twiMid + ".txt");
+			progress = 100;
 		} else {
 			progress = weiboService.getProgress();
 			if (progress < 100) {
@@ -91,7 +103,7 @@ public class TwiAction extends BaseAction {
 			}
 			twi = weiboService.getTwi();
 			if (twi != null) {
-				new TweetPersistence().writeEntityJSON(twi, twi.getTwiMid());
+				new TweetPersistence().writeEntityJSON(twi, twiPath + File.separator + twi.getTwiMid() + ".txt");
 			}
 		}
 		if (twi != null) {
@@ -113,11 +125,16 @@ public class TwiAction extends BaseAction {
 	}
 
     public String chart(){
+    	weiboService = null;
+    	progress = 0;
+    	this.errorMsg = null;
     	return "ajax";
     }
 
-    public void setTwiMid(String twiMid) {
-		this.twiMid = twiMid;
+    public void setTwiMid(String twiMid) {		
+		String[] ids = WeiboUtil.urlToTwiMidUid(twiMid);
+		this.uid = ids[0];
+		this.twiMid = ids[1];
 	}
 
     public List<PieChart> getUserTypeData() {
@@ -158,6 +175,10 @@ public class TwiAction extends BaseAction {
 
 	public void setMediaListFile(Resource mediaListFile) {
 		this.mediaListFile = mediaListFile;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
 	}
 
 }

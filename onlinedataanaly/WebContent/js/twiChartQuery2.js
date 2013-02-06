@@ -9,12 +9,12 @@ $(document).ready( function() {
            {twiMid :$("#twiMid").val()},
            function(data){
         	   var res = eval(data);
-               var actionErrors = res.actionErrors;
-               if(typeof(actionErrors) != "undefined" && actionErrors != "") {
+               var actionErrors = res.errorMsg;
+               if(actionErrors != null && typeof(actionErrors) != "undefined" && actionErrors != "") {
 	        	   $("#error_div").css('display','block');
 	        	   $("#error_div").text(actionErrors);
 	        	   $("#progress_div").css('display','none');
-               } else {	        	   
+               } else {
 	        	   setTimeout(pollServer,1000);
                }
             },
@@ -48,7 +48,7 @@ $(document).ready( function() {
     			               var renderarray = new Array("repostRatio", "repostSex", "repostUserType", "repostLocation");
     			               var widtharray = new Array(330, 330, 330, 330);
     			               var heightarray = new Array(400, 400, 400, 400);
-    			               var distancearray = new Array(-3, -3, -3, 3);
+    			               var distancearray = new Array(-30, -30, -30, 3);
     			               
     			               for(var i=0; i<4; i++) {
     			            	  buildPie(renderarray[i], widtharray[i], heightarray[i], titlearray[i], dataarray[i], distancearray[i]);

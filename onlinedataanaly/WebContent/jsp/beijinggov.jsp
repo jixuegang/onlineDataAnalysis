@@ -55,7 +55,8 @@
             <jsp:include page="sidebar.jsp"/>
         </div>
         <div class="span9">
-            <div class="well row-fluid" id="search_div">
+        	<div class="well row-fluid" id="search_div">               
+			<form class="form-search">
                 <select class="span2" id="dayOfstat">
                 <option value="1">1天</option>
                 <option value="2">2天</option>
@@ -63,8 +64,8 @@
                 <option value="4">4天</option>
                 <option value="5">5天</option>
               </select>
-				<input type="button" id="analysis" name="analysis" value="生成报表" class="btn"/>
-
+              <input type="button" id="analysis" name="analysis" value="生成报表" class="btn"/>
+            </form>
             </div>
             <div id="progress_div" class="progress progress-striped" style="display:none">
 			  	<div id="progress_bar" class="bar" style="width:1%"></div>
@@ -88,14 +89,12 @@
 						<s:iterator value="filenames.descendingKeySet()" id="id" status='st'>
 		                <tr id="row<s:property value='#st.index + 1'/>">
 		                  <td><s:property value='#st.index + 1'/> </td>
-		                  <td><a href="download?path=resources/<s:property value="#id"/>"><s:property value="#id"/></a></td>
-		                  <td><s:property value="filenames.get(#id)"/> </td>
+		                  <td><a href="download?path=resources/beijinggov/<s:property value="filenames.get(#id)"/>"><s:property value="filenames.get(#id)"/></a></td>
+		                  <td><s:property value="#id"/> </td>
 		                </tr>
 		                </s:iterator>
-		                
 		              </tbody>
-	            </table>
-                
+	            </table>                
               </fieldset>
             </div>
         </div>
@@ -106,6 +105,7 @@
 <script>
 $("#twi_li").removeClass("active");
 $("#beijinggov_li").addClass("active");
+$("#hottwi_li").removeClass("active");
 </script>
 </body>
 </html>
